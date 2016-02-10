@@ -54,7 +54,7 @@ describe 'Download', ->
             encryptedFileId: @privateKeyObj.encrypt 'file-id', 'base64'
 
       @shareLink = @box
-        .post "/files/file-id"
+        .put "/files/file-id"
         .reply 201,
           shared_link:
             download_url: "#{@boxServiceUri}/download-link"

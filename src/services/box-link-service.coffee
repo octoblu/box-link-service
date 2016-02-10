@@ -32,12 +32,12 @@ class boxLinkService
         bearer: token
       json:
         shared_link:
-          access: 'open'
+          access: null
           unshared_at: moment().add(10, 'minutes').utc().format()
 
-    request.post options, (error, response, body) =>
+    request.put options, (error, response, body) =>
       return callback @_createError 500, error.message if error?
-      return callback @_createError response.statusCode, body if response.statusCode > 299
+      return callback @_createError response.statusCode, JSON.stringify(body) if response.statusCode > 299
       return callback @_createError 503, 'Missing Download Url from Response' unless body?.shared_link?.download_url?
       meshbluHttp = new MeshbluHttp meshbluAuth
       meshbluHttp.unregister uuid: meshbluAuth.uuid, (error) =>
