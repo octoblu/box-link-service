@@ -32,7 +32,7 @@ class boxLinkService
         bearer: token
       json:
         shared_link:
-          access: null
+          access: 'open'
           unshared_at: moment().add(10, 'minutes').utc().format()
 
     request.post options, (error, response, body) =>
