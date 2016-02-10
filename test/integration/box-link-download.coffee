@@ -56,7 +56,8 @@ describe 'Download', ->
       @shareLink = @box
         .post "/files/file-id"
         .reply 201,
-          url: "#{@boxServiceUri}/download-link"
+          shared_link:
+            download_url: "#{@boxServiceUri}/download-link"
 
       @downloadLink = @box
         .get "/download-link"
