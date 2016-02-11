@@ -8,7 +8,7 @@ class Command
       port:           process.env.PORT || 80
       disableLogging: process.env.DISABLE_LOGGING == "true"
 
-    @boxServiceUri = process.env.box_SERVICE_URI || 'https://api.box.com/2.0'
+    @boxServiceUri = process.env.BOX_SERVICE_URI || 'https://api.box.com/2.0'
     @privateKeyBase64 = process.env.MESHBLU_PRIVATE_KEY_BASE64
 
   panic: (error) =>
