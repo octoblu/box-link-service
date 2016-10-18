@@ -1,8 +1,5 @@
-cors               = require 'cors'
-morgan             = require 'morgan'
-express            = require 'express'
-bodyParser         = require 'body-parser'
-errorHandler       = require 'errorhandler'
+expressOctoblu     = require 'express-octoblu'
+enableDestroy      = require 'server-destroy'
 meshbluHealthcheck = require 'express-meshblu-healthcheck'
 MeshbluConfig      = require 'meshblu-config'
 debug              = require('debug')('box-link-service:server')
@@ -17,16 +14,7 @@ class Server
     @server.address()
 
   run: (callback) =>
-    app = express()
-    app.use meshbluHealthcheck()
-    app.use morgan 'dev', immediate: false unless @disableLogging
-    app.use cors()
-    app.use errorHandler()
-    app.use bodyParser.urlencoded limit: '1mb', extended : true
-    app.use bodyParser.json limit : '1mb'
-
-    app.options '*', cors()
-
+    app = expressOctoblu()
     boxLinkService = new BoxLinkService {@meshbluConfig,@boxServiceUri}
 
     router = new Router {boxLinkService,@meshbluConfig}
@@ -34,8 +22,12 @@ class Server
     router.route app
 
     @server = app.listen @port, callback
+    enableDestroy @server
 
   stop: (callback) =>
     @server.close callback
+
+  destroy: =>
+    @server.destroy()
 
 module.exports = Server

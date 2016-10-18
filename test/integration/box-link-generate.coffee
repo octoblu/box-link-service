@@ -1,8 +1,9 @@
-http        = require 'http'
-request     = require 'request'
-MeshbluHttp = require 'meshblu-http'
-shmock      = require '@octoblu/shmock'
-Server      = require '../../src/server'
+http          = require 'http'
+request       = require 'request'
+enableDestroy = require 'server-destroy'
+MeshbluHttp   = require 'meshblu-http'
+shmock        = require '@octoblu/shmock'
+Server        = require '../../src/server'
 
 describe 'Generate', ->
   before ->
@@ -14,6 +15,7 @@ describe 'Generate', ->
 
   beforeEach (done) ->
     @meshblu = shmock 0xd00d
+    enableDestroy @meshblu
 
     serverOptions =
       port: undefined,
@@ -30,11 +32,9 @@ describe 'Generate', ->
       @serverPort = @server.address().port
       done()
 
-  afterEach (done) ->
-    @server.stop done
-
-  afterEach (done) ->
-    @meshblu.close done
+  afterEach ->
+    @server.destroy()
+    @meshblu.destroy()
 
   describe 'On POST /box/links', ->
     beforeEach (done) ->
