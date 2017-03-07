@@ -1,6 +1,6 @@
 {
   "name": "box-link-service",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "description": "Put some description here",
   "keywords": [],
   "homepage": "https://github.com/octoblu/box-link",
@@ -37,11 +37,11 @@
     "coffee-script": "^1.10.0",
     "debug": "^2.2.0",
     "express-bearer-token": "^2.1.0",
-    "express-meshblu-auth": "^9.1.0",
-    "express-octoblu": "^3.0.1",
+    "express-meshblu-auth": "~2.0.1",
+    "express-octoblu": "^1.1.1",
     "lodash": "^4.17.4",
-    "meshblu-config": "^6.4.3",
-    "meshblu-http": "^9.8.0",
+    "meshblu-config": "^3.1.1",
+    "meshblu-http": "^5.0.2",
     "moment": "^2.11.2",
     "request": "^2.66.0",
     "server-destroy": "^1.0.1"
