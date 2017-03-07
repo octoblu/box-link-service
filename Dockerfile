@@ -1,4 +1,4 @@
-FROM node:7-apline
+FROM node:7-alpine
 MAINTAINER Octoblu, Inc. <docker@octoblu.com>
 
 EXPOSE 80
